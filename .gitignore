@@ -1,0 +1,23 @@
+# Python virtual environment
+.venv/
+venv/
+env/
+ENV/
+
+# Bytecode files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Distribution and packaging
+build/
+dist/
+*.egg-info
+*.egg
+
+# Environment variables
+.env
+
+# Ignore specific directories
+electricity_model/Short-term\ electricity\ load\ forecasting\ \(Panama\ case\ study\)/

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Electricity Prediction</title>
+    <script>
+        function submitDate(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Get the date from the form input
+            const date = document.getElementById('prediction-date').value;
+
+            // Make an AJAX request to the API endpoint
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ date: date }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Prediction data:', data);
+                // You can process the prediction data here, e.g., display it on the page
+                alert('Prediction data received. Check the console for details.');
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Electricity Consumption Prediction</h1>
+
+    <!-- Date Input Form Section -->
+    <form id="prediction-form">
+        <label for="prediction-date">Enter the Date:</label>
+        <input type="date" id="prediction-date" name="prediction-date" max="2024-09-20" required>
+        <input type="submit" value="Submit">
+    </form>
+
+    <!-- Call the submitDate function when the form is submitted -->
+    <script>
+        document.getElementById('prediction-form').addEventListener('submit', submitDate);
+    </script>
+</body>
+</html>
