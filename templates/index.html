@@ -17,15 +17,19 @@
                 },
                 body: JSON.stringify({ date: date }),
             })
-            .then(response => response.json())
+            .then(response => {
+                console.log('Response status:', response.status);
+                return response.json();
+            })
             .then(data => {
-                console.log('Prediction data:', data);
+                console.log('Prediction data:', JSON.stringify(data, null, 2)); // Logs the JSON data in a pretty format
                 // You can process the prediction data here, e.g., display it on the page
                 alert('Prediction data received. Check the console for details.');
             })
             .catch((error) => {
                 console.error('Error:', error);
             });
+
         }
     </script>
 </head>
