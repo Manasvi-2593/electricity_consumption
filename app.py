@@ -134,13 +134,13 @@ from flask import jsonify
 @app.route('/predict', methods=['POST'])
 def predict_and_plot_day():
     date_str = request.form.get('date') or request.json.get('date')
-
+    print("searching for locations")
     # Fetch weather data
     locations = ["Santiago, Panama", "David, Panama", "Tocumen, Panama"]
     start_date = date_str
     end_date = date_str
     weather_data = fetch_and_extract_weather_for_all_locations(locations, start_date, end_date, api_key)
-    
+    print("fetched weather data")
     # Flatten the weather data
     flattened_weather_data = flatten_weather_info(weather_data)
 
@@ -148,7 +148,7 @@ def predict_and_plot_day():
     start_time = datetime.strptime(date_str, '%Y-%m-%d')
     end_time = start_time + timedelta(days=1)
     time_range = pd.date_range(start=start_time, end=end_time - timedelta(hours=1), freq='H')
-
+    print("combining information")
     data = []
     for timestamp in time_range:
         hour_str = timestamp.strftime('%H:%M:%S')
@@ -178,7 +178,7 @@ def predict_and_plot_day():
         data.append(row)
 
     df = pd.DataFrame(data)
-
+    print("Ensure all feature columns are present")
     # Ensure all feature columns are present
     feature_columns = ['month', 'hour', 'day', 'hour_sin', 'hour_cos', 'QV2M_toc', 'TQL_toc', 'W2M_toc', 
                        'QV2M_san', 'TQL_san', 'W2M_san', 'QV2M_dav', 'TQL_dav', 'W2M_dav', 
@@ -193,13 +193,13 @@ def predict_and_plot_day():
 
     # Reshape the data to fit the model's input shape
     df_reshaped = df_scaled.reshape(df_scaled.shape[0], 1, df_scaled.shape[1])
-
+    print("predicting for the given data")
     # Predict using the loaded model
     predictions = loaded_model.predict(df_reshaped).flatten()
 
     # Convert predictions to a list of Python floats for JSON serialization
     predictions_list = predictions.tolist()
-
+    print("sending response")
     # Return the predictions as a JSON object
     return jsonify({'predictions_list': predictions_list})
 
