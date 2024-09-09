@@ -10,14 +10,17 @@ from datetime import datetime, timedelta
 import keras
 from dotenv import load_dotenv
 import os
+from flask_cors import CORS
 
 # Load environment variables from .env file
 load_dotenv()
 # Retrieve the API key from the environment variables
 api_key = os.getenv('api_key')
+if api_key is None:
+    raise ValueError("API key is not set in environment variables.")
 # Initialize Flask app
 app = Flask(__name__)
-
+CORS(app, resources={r"/predict": {"origins": "*"}})
 # Load the trained model and scaler
 with open('electricity_model/gru_model.pkl', 'rb') as file:
     loaded_model = pickle.load(file)
