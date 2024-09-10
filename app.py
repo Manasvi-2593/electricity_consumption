@@ -140,7 +140,7 @@ def predict_and_plot_day():
     start_date = date_str
     end_date = date_str
     weather_data = fetch_and_extract_weather_for_all_locations(locations, start_date, end_date, api_key)
-    return jsonify({"message":"fetched weather data"})
+    # return jsonify({"message":"fetched weather data"})
     # Flatten the weather data
     flattened_weather_data = flatten_weather_info(weather_data)
 
@@ -148,7 +148,7 @@ def predict_and_plot_day():
     start_time = datetime.strptime(date_str, '%Y-%m-%d')
     end_time = start_time + timedelta(days=1)
     time_range = pd.date_range(start=start_time, end=end_time - timedelta(hours=1), freq='H')
-    print("combining information")
+    return jsonify({"message":"combining information"})
     data = []
     for timestamp in time_range:
         hour_str = timestamp.strftime('%H:%M:%S')
