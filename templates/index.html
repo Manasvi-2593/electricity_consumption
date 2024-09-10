@@ -10,7 +10,7 @@
             const date = document.getElementById('prediction-date').value;
 
             // Make an AJAX request to the API endpoint
-            fetch('https://electricity-consumption-uw5i.onrender.com/predict', {
+            fetch('/predict', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

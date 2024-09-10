@@ -134,13 +134,13 @@ from flask import jsonify
 @app.route('/predict', methods=['POST'])
 def predict_and_plot_day():
     date_str = request.form.get('date') or request.json.get('date')
-    return "searching for locations"
+    # return "searching for locations"
     # Fetch weather data
     locations = ["Santiago, Panama", "David, Panama", "Tocumen, Panama"]
     start_date = date_str
     end_date = date_str
     weather_data = fetch_and_extract_weather_for_all_locations(locations, start_date, end_date, api_key)
-    print("fetched weather data")
+    return jsonify({"message":"fetched weather data"})
     # Flatten the weather data
     flattened_weather_data = flatten_weather_info(weather_data)
 
