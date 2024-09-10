@@ -194,7 +194,7 @@ def predict_and_plot_day():
     # return jsonify({"df":df})
     # Reshape the data to fit the model's input shape
     df_reshaped = df_scaled.reshape(df_scaled.shape[0], 1, df_scaled.shape[1])
-    return jsonify({"message":"predicting for the given data"})
+    # return jsonify({"message":"predicting for the given data"})
     print("predicting for the given data")
     # Predict using the loaded model
     predictions = loaded_model.predict(df_reshaped).flatten()
