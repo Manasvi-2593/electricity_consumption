@@ -177,7 +177,7 @@ def predict_and_plot_day():
         }
         data.append(row)
    
-    return jsonify({"message":"Extracted features for all hours"})
+    return jsonify({"message":data})
     df = pd.DataFrame(data)
     print("Ensure all feature columns are present")
     # Ensure all feature columns are present
