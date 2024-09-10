@@ -153,7 +153,6 @@ def predict_and_plot_day():
     for timestamp in time_range:
         hour_str = timestamp.strftime('%H:%M:%S')
         kmh_to_ms = 0.27778
-        return jsonify({"message":"Extracting features for all hours"})
         print("")
         # Add missing 'month', 'hour', 'day', 'hour_sin', 'hour_cos'
         row = {
@@ -178,6 +177,7 @@ def predict_and_plot_day():
         }
         data.append(row)
    
+    return jsonify({"message":"Extracted features for all hours"})
     df = pd.DataFrame(data)
     print("Ensure all feature columns are present")
     # Ensure all feature columns are present
