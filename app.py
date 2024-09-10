@@ -148,12 +148,12 @@ def predict_and_plot_day():
     start_time = datetime.strptime(date_str, '%Y-%m-%d')
     end_time = start_time + timedelta(days=1)
     time_range = pd.date_range(start=start_time, end=end_time - timedelta(hours=1), freq='H')
-    return jsonify({"message":"combining information"})
+    # return jsonify({"message":"combining information"})
     data = []
     for timestamp in time_range:
         hour_str = timestamp.strftime('%H:%M:%S')
         kmh_to_ms = 0.27778
-
+        print("Extracting features for all hours")
         # Add missing 'month', 'hour', 'day', 'hour_sin', 'hour_cos'
         row = {
             'month': timestamp.month,
@@ -176,7 +176,7 @@ def predict_and_plot_day():
             'holiday': us_holidays_2024.get(date_str, 0)
         }
         data.append(row)
-
+   
     df = pd.DataFrame(data)
     print("Ensure all feature columns are present")
     # Ensure all feature columns are present
@@ -190,7 +190,7 @@ def predict_and_plot_day():
 
     # Scale the features
     df_scaled = scaler.transform(df)
-
+    return jsonify({"df":df})
     # Reshape the data to fit the model's input shape
     df_reshaped = df_scaled.reshape(df_scaled.shape[0], 1, df_scaled.shape[1])
     print("predicting for the given data")
