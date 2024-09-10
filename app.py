@@ -191,7 +191,7 @@ def predict_and_plot_day():
 
     # Scale the features
     df_scaled = scaler.transform(df)
-    return jsonify({"df":df})
+    # return jsonify({"df":df})
     # Reshape the data to fit the model's input shape
     df_reshaped = df_scaled.reshape(df_scaled.shape[0], 1, df_scaled.shape[1])
     print("predicting for the given data")
