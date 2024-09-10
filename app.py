@@ -185,7 +185,7 @@ def predict_and_plot_day():
                        'QV2M_san', 'TQL_san', 'W2M_san', 'QV2M_dav', 'TQL_dav', 'W2M_dav', 
                        'T2M_toc', 'T2M_san', 'T2M_dav', 'holiday']
     df = df[feature_columns]
-
+    return jsonify({"message":"feature columns are added"})
     # Handle missing values if any
     df = df.fillna(method='ffill').fillna(method='bfill')
 
